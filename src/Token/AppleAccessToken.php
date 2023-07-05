@@ -44,11 +44,7 @@ class AppleAccessToken extends AccessToken
             $last = end($keys);
             foreach ($keys as $key) {
                 try {
-                    try {
-                        $decoded = JWT::decode($options['id_token'], $key);
-                    } catch (\UnexpectedValueException $e) {
-                        $decoded = JWT::decode($options['id_token'], $key, ['RS256']);
-                    }
+                    $decoded = JWT::decode($options['id_token'], $key);
                     break;
                 } catch (\Exception $exception) {
                     if ($last === $key) {
